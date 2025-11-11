@@ -1,0 +1,386 @@
+  :root{
+  --purple:#353435;
+  --purple-2:#626164;
+  --sidebar-bg:#e9ecff; /* subtle matching background */
+  --surface:#f4f6fb;
+  --card-bg:#ffffff;
+  --muted:#6b7280;
+  --glass: rgba(255,255,255,0.15);
+  --glass-hover: rgba(255,255,255,0.22);
+  --shadow: rgba(15,23,42,0.08);
+}
+
+/* ====== Base ====== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background:var(--surface);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* App layout */
+.app{display:flex; min-height:100vh;}
+
+/* ====== Sidebar (collapsed + full) ====== */
+.sidebar{
+  position:fixed;
+  left:0; top:0; bottom:0;
+  width:80px; /* default collapsed */
+  background:var(--sidebar-bg);
+  display:flex; align-items:flex-start; justify-content:center;
+  padding-top:18px; z-index:30;
+  transition: all .28s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+  
+}
+/* ===== Scroll Fixes ===== */
+
+/* Allow the whole app to scroll if content is tall */
+body, html {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Make main content scrollable independently if needed */
+.main {
+  overflow-y: auto;
+  min-height: 100vh;
+  max-height: 100%;
+}
+
+/* Sidebar full content scrolls inside (not off-screen) */
+.sidebar-full {
+  overflow-y: auto;
+  max-height: 100vh;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.4) transparent;
+}
+
+/* Modal body scrolls internally if notifications overflow */
+.modal-body {
+  overflow-y: auto;
+  max-height: 60vh;
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple) #f1f1f1;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: hide scrollbar look (Chrome/Safari) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.3);
+}
+
+/* small visible block */
+.name-block{
+  width:60px; padding:10px; border-radius:12px;
+  background:var(--purple); color:#fff; text-align:center; font-weight:700;
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+}
+.name-block .initials{font-size:14px}
+.name-block .min-name{font-size:12px; opacity:0.95}
+
+/* full sidebar content (hidden by default on small screens) */
+.sidebar-full{
+  position:fixed;
+  left:-320px; /* out of view when closed on mobile */
+  top:0; bottom:0;
+  width:280px;
+  background:linear-gradient(180deg,var(--purple),var(--purple-2));
+  color:#fff;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+  transition: all .28s ease;
+  z-index:40;
+  transform: translateX(0);
+}
+
+/* when sidebar is open (on mobile), slide full sidebar in */
+.sidebar.open .sidebar-full{
+  left:0;
+}
+
+/* on larger screens show the full sidebar by default and adjust main margin */
+@media (min-width: 1000px) {
+  .sidebar{ width:260px; }
+  .name-block{ display:none; }
+  .sidebar-full{ left:0; position:static; width:260px; background:linear-gradient(180deg,var(--purple),var(--purple-2)); box-shadow:none; color:#fff; padding:22px; }
+  .main{ margin-left:260px; transition: margin .28s ease; }
+}
+
+/* profile inside full sidebar */
+.profile{display:flex; gap:12px; align-items:center}
+.avatar{
+  width:56px; height:56px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:18px;
+  background:rgba(255,255,255,0.15); color:#fff;
+}
+.pname .name{font-weight:700}
+.pname .role{font-size:13px; opacity:0.95}
+
+/* sections */
+.sidebar h4{font-size:13px; margin-bottom:6px; opacity:0.9}
+.sidebar ul{list-style:none; margin:0; padding:0}
+.sidebar ul li{margin-bottom:6px; font-size:14px}
+
+/* nav links */
+.sidebar-nav{display:flex; flex-direction:column; gap:8px}
+.sidebar-nav a{
+  text-decoration:none; color:rgba(255,255,255,0.95); padding:10px 12px;
+  border-radius:8px; font-size:14px; display:block; transition:all .2s;
+}
+.sidebar-nav a:hover, .sidebar-nav a.active{ background: rgba(0,0,0,0.08); }
+
+/* close button for overlay */
+.close-sidebar{
+  margin-top:auto; align-self:flex-end;
+  background:transparent; border:1px solid rgba(255,255,255,0.12);
+  color:#fff; padding:8px 10px; border-radius:8px; cursor:pointer;
+}
+
+/* ====== Main area ====== */
+.main{
+  margin-left:80px; /* when collapsed */
+  padding:20px 24px;
+  transition: all .28s ease;
+}
+
+/* Topbar */
+.topbar{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px}
+.topbar .left{display:flex; align-items:center; gap:12px}
+.icon-btn{font-size:20px; background:transparent; border:none; cursor:pointer}
+.logo{font-size:18px; margin:0}
+.right{display:flex; align-items:center; gap:10px}
+.date{color:var(--muted); font-size:13px}
+
+/* buttons */
+.btn{padding:7px 12px; border-radius:8px; border:none; cursor:pointer; background:var(--purple); color:#fff; transition: all .18s}
+.btn:hover{background:var(--purple-2)}
+.btn.ghost{background:#fff; color:var(--purple); border:1px solid var(--purple)}
+.logout{background:#ef4444}
+.badge{background:#ff3b30; color:#fff; font-size:12px; padding:3px 7px; border-radius:999px; margin-left:8px}
+
+/* ====== Welcome card ====== */
+.welcome-card{
+  display:flex; flex-direction:column; gap:10px; padding:20px; border-radius:16px;
+  background:var(--card-bg); box-shadow:0 12px 28px var(--shadow);
+  margin-bottom:20px;
+}
+.welcome-card h2{margin:0; font-size:22px}
+.welcome-card span{color:var(--purple)}
+.quote{font-size:14px; color:var(--muted)}
+
+/* ====== Cards grid ====== */
+.cards-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:14px;
+  margin-bottom:18px;
+}
+.card{
+  background:var(--card-bg); padding:14px; border-radius:12px; box-shadow:0 8px 22px rgba(15,23,42,0.04);
+  transition: transform .18s ease, box-shadow .18s ease; cursor:pointer;
+}
+.card:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(15,23,42,0.08)}
+.card-head{display:flex; align-items:center; gap:12px}
+.card-head .icon{font-size:36px}
+
+/* ====== Stats row ====== */
+.stats-row{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:12px;
+  margin-bottom:40px;
+}
+.stat{
+  background:var(--card-bg); padding:14px; border-radius:10px; text-align:center; box-shadow:0 8px 22px rgba(15,23,42,0.04);transition: transform .18s ease;
+}
+.stat-icon{font-size:40px; margin-bottom:8px}
+.stat-val{font-size:20px; font-weight:700}
+.stat-label{color:var(--muted); margin-top:6px}
+.stat:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(15,23,42,0.08)}
+
+/* ====== Modal / Notifications ====== */
+.modal-backdrop{
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background: rgba(10,12,20,0.45); padding:20px; z-index:70;
+}
+.modal-backdrop.show{display:flex}
+.modal{
+  width:400px; max-height:80vh; background:#fff; border-radius:12px; overflow:hidden; display:flex; flex-direction:column;
+  box-shadow:0 28px 70px rgba(0,0,0,0.32); animation: fadeIn .32s ease;
+}
+.modal-header, .modal-footer{padding:14px 16px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eef2f7}
+.modal-body{padding:14px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; flex:1}
+
+/* notification card */
+.notif{
+  background:#fbfcff; border:1px solid #eef2ff; border-radius:12px;
+  padding:12px 14px; min-height:84px; display:flex; flex-direction:column; justify-content:space-between;
+  transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+  transform: translateY(0); opacity:1;
+}
+.notif:hover{transform:translateY(-6px); box-shadow:0 14px 36px rgba(0,0,0,0.12)}
+.notif.read{opacity:0.55; background:#f3f4f6; border:1px solid #e5e7eb}
+.n-head{display:flex; justify-content:space-between; gap:8px; font-weight:600}
+.n-tag{font-size:12px; color:#fff; background:#111827; padding:4px 8px; border-radius:999px}
+.n-text{margin-top:8px; color:#0f172a}
+.n-meta{font-size:12px; color:var(--muted); margin-top:8px; align-self:flex-end}
+
+/* Animations */
+@keyframes fadeIn {0%{opacity:0; transform:scale(.985)} 100%{opacity:1; transform:scale(1)}}
+@keyframes slideUp {0%{opacity:0; transform:translateY(10px)} 100%{opacity:1; transform:translateY(0)}}
+
+/* ====== Responsive Media Queries ====== */
+/* Mobile first adjustments */
+@media (max-width: 600px) {
+  .sidebar{ width:70px }
+  .name-block{ width:54px; padding:8px; font-size:13px }
+  .main{ margin-left:70px; padding:14px }
+  .topbar .logo{ font-size:16px }
+  .cards-grid{ grid-template-columns: 1fr; gap:12px }
+  .stats-row{ grid-template-columns: 1fr; gap:12px }
+  .welcome-card{ padding:14px }
+  .card-head .icon{ font-size:40px } /* keep icon large */
+  .modal{ width:94vw; max-height:78vh }
+  .notif{ min-height:72px; padding:10px }
+}
+
+/* Small tablets */
+@media (min-width: 601px) and (max-width: 900px) {
+  .sidebar{ width:80px }
+  .main{ margin-left:80px }
+  .cards-grid{ grid-template-columns: repeat(2,1fr) }
+  .stats-row{ grid-template-columns: repeat(2,1fr) }
+  .modal{ width:86vw }
+}
+
+/* mid-size (tablet / small laptop) */
+@media (min-width: 901px) and (max-width: 999px) {
+  .sidebar{ width:100px }
+  .main{ margin-left:100px }
+  .cards-grid{ grid-template-columns: repeat(3,1fr) }
+  .stats-row{ grid-template-columns: repeat(3,1fr) }
+  .modal{ width:420px }
+}
+
+/* Desktop / large */
+@media (min-width: 1000px) {
+  .sidebar{ width:260px } /* full visible */
+  .main{ margin-left:260px }
+  .cards-grid{ grid-template-columns: repeat(4,1fr) }
+  .stats-row{ grid-template-columns: repeat(4,1fr) }
+  .modal{ width:400px }
+}
+
+/* Accessibility focus styles */
+.card:focus, .stat:focus, .sidebar-nav a:focus, .btn:focus {
+  outline: 3px solid rgba(92,59,229,0.14);
+  outline-offset: 3px;
+}
+/* === White Profile Sidebar & Notification Modal Adjustments === */
+
+/* Full sidebar (profile section) white background + black text */
+.sidebar-full {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Profile avatar and text */
+.sidebar-full .avatar {
+  background: #f2f2f2 !important;
+  color: #000 !important;
+}
+.sidebar-full .pname .name,
+.sidebar-full .pname .role {
+  color: #000 !important;
+}
+
+/* Sidebar navigation links */
+.sidebar-full .sidebar-nav a {
+  color: #000 !important;
+  background: transparent !important;
+}
+.sidebar-full .sidebar-nav a:hover,
+.sidebar-full .sidebar-nav a.active {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #000 !important;
+}
+
+/* Section titles in sidebar */
+.sidebar-full h4 {
+  color: #000 !important;
+}
+
+/* Sidebar close button (white background, black text) */
+.sidebar-full .close-sidebar {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid rgba(0,0,0,0.15) !important;
+}
+
+/* === Notifications Modal === */
+.modal {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Notification cards inside modal */
+.notif {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #e5e7eb !important;
+}
+.notif.read {
+  background: #f9fafb !important;
+  color: #444 !important;
+}
+.n-tag {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Notification text & meta */
+.n-text,
+.n-meta {
+  color: #000 !important;
+}
+
+/* Modal header and footer */
+.modal-header,
+.modal-footer {
+  background: #fff !important;
+  color: #000 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Close button inside notification modal */
+.modal-header button,
+.modal-footer button,
+.close-sidebar {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid rgba(0,0,0,0.2) !important;
+}
+.modal-header button:hover,
+.modal-footer button:hover {
+  background: #f2f2f2 !important;
+}   

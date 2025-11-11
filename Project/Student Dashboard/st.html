@@ -1,0 +1,201 @@
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <!-- On desktop: narrow left column (name-block). On mobile/tablet: overlay when .open -->
+    <aside class="sidebar" id="sidebar" aria-hidden="false">
+      <!-- small name block always visible -->
+      <div class="name-block" id="nameBlock">
+        <div class="initials">PR</div>
+        <div class="min-name">Priya</div>
+      </div>
+
+      <!-- expanded full nav (shown on desktop or when sidebar.open) -->
+      <div class="sidebar-full" id="sidebarFull" aria-hidden="true">
+        <div class="profile">
+          <div class="avatar">PB</div>
+          <div class="pname">
+            <div class="name">Priya Reddy</div>
+            <div class="role">B.Com · 3rd Year</div>
+          </div>
+        </div>
+
+        <div class="personal">
+          <h4>Personal Info</h4>
+          <ul>
+            <li><strong>Reg. No:</strong> 21456</li>
+            <li><strong>Phone:</strong> +91 9876543210</li>
+            <li><strong>Email:</strong> priya@example.com</li>
+            <li><strong>Address:</strong> 123, MG Road, Bengaluru</li>
+            <li><strong>Category:</strong> General</li>
+          </ul>
+        </div>
+
+        <div class="academic">
+          <h4>Academic Details</h4>
+          <ul>
+            <li><strong>Course:</strong> B.Com</li>
+            <li><strong>Year:</strong> 3rd Year</li>
+            <li><strong>Semester:</strong> 5th Semester</li>
+            <li><strong>CGPA:</strong> 8.45</li>
+            <li><strong>Academic Year:</strong> 2022 - 2025</li>
+            <li><strong>College:</strong> Seshadripuram College</li>
+          </ul>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="#" class="active">Dashboard</a>
+          <a href="#">Profile</a>
+          <a href="#">Exams</a>
+          <a href="#">Attendance</a>
+          <a href="#">Timetable</a>
+          <a href="#">Fees</a>
+          <a href="#">Committees</a>
+        </nav>
+
+        <button class="close-sidebar" id="closeSidebar" aria-label="Close sidebar">✕</button>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <main class="main" id="mainContent">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="left">
+          <button id="mobileToggle" class="icon-btn" aria-label="Open menu">☰</button>
+          <h1 class="logo">Student Dashboard</h1>
+        </div>
+
+        <div class="right">
+          <div class="date" id="todayDate">26 Oct 2025</div>
+          <button class="btn ghost">All Notices</button>
+          <button class="btn" id="notifBtn" aria-haspopup="dialog" aria-controls="modalBackdrop">
+            Notifications <span class="badge" id="notifBadge">3</span>
+          </button>
+          <button class="btn logout">Logout</button>
+        </div>
+      </header>
+
+      <!-- WELCOME CARD (single card) -->
+      <section class="welcome-card" aria-label="Welcome">
+        <div class="welcome-text">
+          <h2>Welcome back, <span>Priya!</span></h2>
+          <p>Here's your academic overview for today.</p>
+        </div>
+        <div class="quote">“The only way to do great work is to love what you do.” — Steve Jobs</div>
+      </section>
+
+      <!-- FEATURE CARDS GRID -->
+      <section class="cards-grid" aria-label="Features">
+        <article class="card" tabindex="0">
+          <div class="card-head"><span class="icon blue">👤</span><h3>Student Details</h3></div>
+          <p class="muted">Personal & academic information</p>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-head"><span class="icon green">📄</span><h3>Exams</h3></div>
+          <p class="muted">Schedule, results & upcoming</p>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-head"><span class="icon purple">⏱</span><h3>Attendance</h3></div>
+          <p class="muted">Track your class attendance</p>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-head"><span class="icon teal">🗓</span><h3>Timetable</h3></div>
+          <p class="muted">View your class schedule</p>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-head"><span class="icon yellow">🤝</span><h3>Committees</h3></div>
+          <p class="muted">Join college committees</p>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-head"><span class="icon orange">📚</span><h3>Syllabus</h3></div>
+          <p class="muted">Current semester syllabus</p>
+        </article>
+
+        <article class="card" tabindex="0">
+          <div class="card-head"><span class="icon red">💳</span><h3>Fee Management</h3></div>
+          <p class="muted">Payments & due status</p>
+        </article>
+      </section>
+
+      <!-- STATS ROW -->
+      <section class="stats-row" aria-label="Statistics">
+        <div class="stat" tabindex="0">
+          <div class="stat-icon">🎓</div>
+          <div class="stat-val">8.45</div>
+          <div class="stat-label">Current CGPA</div>
+        </div>
+
+        <div class="stat" tabindex="0">
+          <div class="stat-icon">📈</div>
+          <div class="stat-val">88.5%</div>
+          <div class="stat-label">Attendance</div>
+        </div>
+
+        <div class="stat" tabindex="0">
+          <div class="stat-icon">🧾</div>
+          <div class="stat-val">2</div>
+          <div class="stat-label">Upcoming Exams</div>
+        </div>
+
+        <div class="stat" tabindex="0">
+          <div class="stat-icon">💰</div>
+          <div class="stat-val">₹25,000</div>
+          <div class="stat-label">Fees Pending</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- NOTIFICATIONS MODAL -->
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true" role="dialog" aria-labelledby="notifTitle">
+    <div class="modal" role="document" aria-live="polite">
+      <header class="modal-header">
+        <h3 id="notifTitle">Notifications</h3>
+        <button class="close" id="closeModal" aria-label="Close notifications">✕</button>
+      </header>
+
+      <div class="modal-body" id="modalBody">
+        <div class="notif">
+          <div class="n-head"><strong>Principal Office</strong> <span class="n-tag">PRIORITY</span></div>
+          <div class="n-text">Important: Academic Calendar Update. Please check the updated calendar for new dates.</div>
+          <div class="n-meta">12/09/2025</div>
+        </div>
+
+        <div class="notif">
+          <div class="n-head"><strong>Dr. Smith (Mathematics)</strong></div>
+          <div class="n-text">Assignment Submission Reminder: Submit by next Monday. Late submissions will not be accepted.</div>
+          <div class="n-meta">10/09/2025</div>
+        </div>
+
+        <div class="notif">
+          <div class="n-head"><strong>HOD Computer Science</strong></div>
+          <div class="n-text">Technical Symposium Registration is open for the annual symposium. Register before 30th Sept.</div>
+          <div class="n-meta">08/09/2025</div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button class="btn ghost" id="markRead">Mark all read</button>
+        <button class="btn" id="closeFooter">Close</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="st.js"></script>
+</body>
+</html>  

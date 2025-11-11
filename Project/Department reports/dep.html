@@ -1,0 +1,108 @@
+department reports <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="dep.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="profile-section">
+                <img src="https://via.placeholder.com/80?text=RK" alt="Dr. Rajesh Kumar" class="profile-pic" />
+                <div>
+                    <div class="profile-name">
+                        <strong>Dr. Rajesh Kumar</strong>
+                        <span class="profile-status"><i class="fas fa-circle online"></i></span>
+                    </div>
+                    <div class="profile-role">Head of Department - BCA</div>
+                    <div class="profile-badge active">Active</div>
+                </div>
+            </div>
+            <div class="profile-details">
+                <div class="block">
+                    <div class="label">Personal Information</div>
+                    <div class="info">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>DOB: 15th March, 1975</span>
+                    </div>
+                    <div class="info">
+                        <i class="fas fa-envelope"></i>
+                        <span>rajesh.kumar@college.edu</span>
+                    </div>
+                    <div class="info">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 98765 43210</span>
+                    </div>
+                    <div class="info">
+                        <i class="fas fa-building"></i>
+                        <span>BCA Block, Room 301</span>
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="label">Education</div>
+                    <ul class="edu-list">
+                        <li>Ph.D. in Computer Science - IIT Delhi (2005)</li>
+                        <li>M.Tech in Software Engineering - IIT Bombay (2001)</li>
+                        <li>B.Tech in Computer Science - Delhi University (1998)</li>
+                    </ul>
+                </div>
+                <div class="block">
+                    <div class="label">Experience & Specialization</div>
+                    <div class="info">Experience: 20+ Years</div>
+                    <div class="info">Specialization: Software Engineering, AI & ML</div>
+                </div>
+                <div class="block">
+                    <div class="label">Working Hours</div>
+                    <div class="working-hours">
+                        <div><span>Monday</span><span>7:30 AM - 2:30 PM</span></div>
+                        <div><span>Tuesday</span><span>7:30 AM - 2:30 PM</span></div>
+                        <div><span>Wednesday</span><span>7:30 AM - 2:30 PM</span></div>
+                        <div><span>Thursday</span><span>7:30 AM - 2:30 PM</span></div>
+                        <div><span>Friday</span><span>7:30 AM - 2:30 PM</span></div>
+                        <div><span>Saturday</span><span>7:30 AM - 2:30 PM</span></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hamburger Button for mobile -->
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Top Navigation -->
+            <nav class="tab-nav" role="navigation" aria-label="Primary Navigation">
+                <button class="tab"><i class="fas fa-home"></i> Home</button>
+                <button class="tab"><i class="fas fa-users"></i> Faculty</button>
+                <button class="tab"><i class="fas fa-calendar-alt"></i> Timetable</button>
+                <button class="tab"><i class="fas fa-bell"></i> Notifications</button>
+                <button class="tab"><i class="fas fa-envelope"></i> Messages</button>
+                <button class="tab"><i class="fas fa-book"></i> Classes</button>
+                <button class="tab active"><i class="fas fa-chart-bar"></i> Reports</button>
+                <button class="tab" id="ai-assistant-btn"><i class="fas fa-robot"></i> AI Assistant</button>
+            </nav>
+            <!-- Dashboard panel -->
+            <section class="dashboard-panel">
+                <div class="reports-title">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Department Reports</span>
+                </div>
+                <div class="reports-grid">
+                    <div class="report-card"><i class="fas fa-users"></i><span>Faculty Reports</span></div>
+                    <div class="report-card"><i class="fas fa-graduation-cap"></i><span>Academic Reports</span></div>
+                    <div class="report-card"><i class="fas fa-clipboard-list"></i><span>Attendance Reports</span></div>
+                    <div class="report-card"><i class="fas fa-chart-line"></i><span>Performance Reports</span></div>
+                    <div class="report-card"><i class="fas fa-tasks"></i><span>Assessment Reports</span></div>
+                    <div class="report-card"><i class="fas fa-exclamation-circle"></i><span>Issue Reports</span></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="dep.js"></script>
+</body>
+</html>
